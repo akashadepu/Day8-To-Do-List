@@ -1,0 +1,79 @@
+
+tasks = []
+
+menu = ("Add task", "View task", "Update task", "Delete task", "Exit")
+
+while True:
+    print("\n===== TO-DO LIST MENU =====")
+
+    for i in range(len(menu)):
+        print(f"{i + 1}. {menu[i]}")
+
+    user_input = input("Enter a menu number: ")
+
+    if user_input == "1":
+        task = input("Enter a task: ")
+
+        if task.strip():
+            tasks.append(task)
+            print("Task added successfully!")
+        else:
+            print("Task cannot be empty.")
+
+    elif user_input == "2":
+        if len(tasks) == 0:
+            print("No tasks available.")
+        else:
+            print("\nYour tasks:")
+            for i in range(len(tasks)):
+                print(f"{i + 1}. {tasks[i]}")
+
+    elif user_input == "3":
+        if len(tasks) == 0:
+            print("No tasks available to update.")
+        else:
+            for i in range(len(tasks)):
+                print(f"{i + 1}. {tasks[i]}")
+
+            try:
+                task_number = int(input("Enter task number to update: "))
+
+                if 1 <= task_number <= len(tasks):
+                    new_task = input("Enter the new task: ")
+
+                    if new_task.strip():
+                        tasks[task_number - 1] = new_task
+                        print("Task updated successfully!")
+                    else:
+                        print("Task cannot be empty.")
+                else:
+                    print("Invalid task number.")
+
+            except ValueError:
+                print("Enter a valid whole number.")
+
+    elif user_input == "4":
+        if len(tasks) == 0:
+            print("No tasks available to delete.")
+        else:
+            for i in range(len(tasks)):
+                print(f"{i + 1}. {tasks[i]}")
+
+            try:
+                task_number = int(input("Enter task number to delete: "))
+
+                if 1 <= task_number <= len(tasks):
+                    deleted_task = tasks.pop(task_number - 1)
+                    print(f"Deleted task: {deleted_task}")
+                else:
+                    print("Invalid task number.")
+
+            except ValueError:
+                print("Enter a valid whole number.")
+
+    elif user_input == "5":
+        print("Exiting To-Do List. Goodbye!")
+        break
+
+    else:
+        print("Invalid menu choice. Enter a number from 1 to 5.")
